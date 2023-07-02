@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// int getSplitIndex(vector<int>& arr, int n) {
+//      O(n^2)
+//     int leftSum = 0;
+//     for(int i=0;i<n;i++) {
+        
+//         leftSum += arr[i];
+        
+//         int rightSum = 0;
+//         for(int j=i+1;j<n;j++) {
+//             rightSum += arr[j];
+//         }
+        
+//         if(rightSum == leftSum) {
+//             return i+1;
+//         }
+//     }
+//     return -1;
+// }
+
+int getSplitIndex(vector<int>& arr, int n) {
+    // O(n)
+    int leftSum = 0;
+    for(int i=0;i<n;i++) {
+        leftSum += arr[i];
+    }
+    
+    int rightSum = 0;
+    for(int i=n-1;i>=0;i--) {
+        rightSum += arr[i];
+        leftSum -= arr[i];
+        
+        if(rightSum == leftSum) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int main()
+{
+    vector<int> arr{1,5,3,4,5};
+    int n = arr.size();
+    
+    int splitIndex = getSplitIndex(arr,n);
+    
+    if(splitIndex == -1) {
+        cout << "not possible\n";
+        return 0;
+    }
+    
+    for(int i=0;i<splitIndex;i++) {
+        cout << arr[i] << ' ';
+    } cout << ", ";
+    
+    for(int i=splitIndex;i<n;i++) {
+        cout << arr[i] << ' ';
+    } cout << endl;
+
+    return 0;
+}
