@@ -1,0 +1,18 @@
+int longestAlternatingSubarray(vector<int>& nums, int threshold) {
+        int n = nums.size();
+        
+        int ans = 0;
+        for(int i=0;i<n;i++) {
+            int par = 0; // started with 0 as frist nums should be even
+            for(int j=i;j<n;j++) {
+                if(nums[j]%2 != par or nums[j] > threshold) {
+                    break;
+                }
+                
+                ans = max(ans,j-i+1); // updating len for every element that satisfies the condition
+                par^=1; // for checking alternating even-odds
+            }
+        }
+        
+        return ans;
+    }
