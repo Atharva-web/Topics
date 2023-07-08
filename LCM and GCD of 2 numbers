@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+
+int gcd(int a, int b) {
+    while(true) {
+        if(a > b) {
+            a = a%b;
+        }
+        else if(b > a) {
+            b = b%a;
+        }
+        if(a == 0 or b == 0) {
+            break;
+        }
+    }
+    return a;
+}
+int main()
+{
+    int a,b; cin >> a >> b;
+    
+    int lcm = (a*b)/gcd(a,b);
+    cout << "gcd(" << a << ',' << b << ") = " << gcd(a,b);
+    cout << "\nlcm(" << a << ',' << b << ") = " << lcm;
+}
